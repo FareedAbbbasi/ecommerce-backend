@@ -1,13 +1,23 @@
-import mongoose from 'mongoose';
+import { app } from './../app';
+import mongoose from "mongoose";
+import { ErrorRequestHandler } from "express";
 import dotenv from 'dotenv';
-
 dotenv.config();
 
-const DBURL = process.env.DBURL;
-if (!DBURL) {
-  throw new Error('DBURL is not defined in .env file');
+const port: number = 5000;
+
+
+async function main() {
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/ecommerc")
+    console.log("Database is connected successfully!")
+    app.listen(port, () => {
+      console.log(`server is running running on the port ${port}`)
+    })
+  } catch (error) {
+    console.log(`failed to connect database ${error}`);
+  }
 }
 
-mongoose.connect(DBURL)
-  .then(() => console.log(`DB Connected! ${DBURL}`))
-  .catch((err) => console.error('DB Connection Error:', err));
+
+main();

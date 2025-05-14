@@ -1,16 +1,11 @@
-import { Request, Response } from "express";
-import express from 'express';
-let app = express();
+import express, { Application } from 'express';
+ export let app = express();
 import dotenv from 'dotenv';
-import { PORT } from "./config/env";
+import signUp from './routes/signup.routes';
+const router = express.Router();
+
+
 app.use(express.json());
 dotenv.config();
-
-app.get("/read", (req:Request, res:Response) => {
-    res.send("This is home api")
-    console.log("Home API")
-})
-
-app.post("/sign-up", signup)
-
-app.listen(PORT, () => console.log(`Server is Running ${PORT}`))
+router.use(express.urlencoded({extended: true}))
+router.post("/sign-up", signUp)
