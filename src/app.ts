@@ -1,11 +1,11 @@
-import express, { Application } from 'express';
- export let app = express();
-import dotenv from 'dotenv';
-import signUp from './routes/signup.routes';
-const router = express.Router();
-
-
+import express from "express";
+export let app = express();
+import dotenv from "dotenv";
+import SignUp from "./routes/signup.routes";
+import { SignIn } from "./routes/signin-routes";
 app.use(express.json());
 dotenv.config();
-router.use(express.urlencoded({extended: true}))
-router.post("/sign-up", signUp)
+app.use(express.urlencoded({ extended: true }));
+
+app.post("/sign-up", SignUp);
+app.post("/login-in", SignIn )

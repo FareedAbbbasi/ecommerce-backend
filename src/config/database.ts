@@ -1,11 +1,9 @@
-import { app } from './../app';
 import mongoose from "mongoose";
-import { ErrorRequestHandler } from "express";
 import dotenv from 'dotenv';
+import { app } from "../app";
 dotenv.config();
 
 const port: number = 5000;
-
 
 async function main() {
   try {
